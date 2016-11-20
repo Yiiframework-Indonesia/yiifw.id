@@ -1,0 +1,46 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 1, 2016, 7:56:05 PM
+    Author     : dee
+*/
+
+.miring {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 0px;
+    z-index: 1000;
+}
+.panel-body .miring {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 16px;
+    z-index: 1000;
+}
+
+.bottom-right-fix{
+    bottom: 16px;
+    position: fixed !important;
+    right: 16px;
+    z-index: 1500;
+}
+
+.bottom-right-absolut{
+    bottom: -16px;
+    position: absolute !important;
+    right: 16px;
+    z-index: 1500;
+}
+
+.label a{
+    color: white;
+}
+
+.label a:hover{
+    color: white;
+}

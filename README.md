@@ -25,7 +25,7 @@ vendor/                  contains dependent 3rd-party packages
 
 * Clone, composer install
 ```
-$ git clone https://github.com/Yiiframework-Indonesia/yiifw.id.git yiifwid # or via ssh : git clone git@gitlab.com:psmx/piknikio.git 
+$ git clone https://github.com/Yiiframework-Indonesia/yiifw.id.git yiifwid
 $ cd yiifwid
 $ composer install --prefer-dist
 $ php init --env=Development --overwrite=n

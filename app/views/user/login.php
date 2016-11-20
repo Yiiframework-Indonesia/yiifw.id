@@ -10,7 +10,6 @@ use yii\helpers\Url;
 
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
-$this->context->layout = 'login';
 ?>
 <div class="row">
     <div class="col-lg-4 col-lg-offset-4">

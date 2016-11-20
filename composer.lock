@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b9aec8a3db2f2e0ab4e76b7af14ac4a5",
-    "content-hash": "76a81d97beab1ccb9c63953985626ddb",
+    "hash": "ce41b46086d0618efd1c811df23e57d5",
+    "content-hash": "133cf5086dd7efc430a20fc16c9eb8e2",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -222,6 +222,52 @@
                 "yii2"
             ],
             "time": "2016-11-08 16:24:39"
+        },
+        {
+            "name": "deesoft/yii2-queue",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/deesoft/yii2-queue.git",
+                "reference": "aaf56496933e7be939607970db6dde1f48152be5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/deesoft/yii2-queue/zipball/aaf56496933e7be939607970db6dde1f48152be5",
+                "reference": "aaf56496933e7be939607970db6dde1f48152be5",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/process": ">=2.4",
+                "yiisoft/yii2": ">=2.0.4"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "dee\\queue\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Misbahul Munir",
+                    "email": "misbahuldmunir@gmail.com"
+                }
+            ],
+            "description": "Yii2 simple queue",
+            "keywords": [
+                "queue",
+                "yii2"
+            ],
+            "time": "2016-11-20 05:35:58"
         },
         {
             "name": "deesoft/yii2-tools",
@@ -471,6 +517,55 @@
                 "mailer"
             ],
             "time": "2016-11-13 15:37:50"
+        },
+        {
+            "name": "symfony/process",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/process.git",
+                "reference": "bb5223b0daac862d40dd1d0d8c16ccaa565716dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/process/zipball/bb5223b0daac862d40dd1d0d8c16ccaa565716dc",
+                "reference": "bb5223b0daac862d40dd1d0d8c16ccaa565716dc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Process\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Process Component",
+            "homepage": "https://symfony.com",
+            "time": "2016-11-19 20:35:20"
         },
         {
             "name": "yiisoft/yii2",
@@ -1163,7 +1258,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "deesoft/yii2-queue": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

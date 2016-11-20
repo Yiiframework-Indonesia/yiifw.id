@@ -53,6 +53,7 @@ class Signup extends Model
             $user->email = $this->email;
             $user->setPassword($this->password);
             $user->generateAuthKey();
+            $user->status = $user::STATUS_PANDING;
             return Yii::$app->getDb()->transaction(function() use($user) {
                     if ($user->save()) {
                         $profile = new UserProfile([
@@ -80,12 +81,12 @@ class Signup extends Model
             'rejectToken' => Yii::$app->tokenManager->generateToken(['reject', $user->id], 'activate.account'),
         ];
 
-        return Yii::$app->queue->push('job/send-mail', [
+       return Yii::$app->queue->push('job/send-mail', [
                 'view' => ['html' => 'activationAccount-html', 'text' => 'activationAccount-text'],
                 'params' => $params,
-                'from' => [Yii::$app->params['supportEmail'] => 'piknikio robot'],
+                'from' => [Yii::$app->params['supportEmail'] => 'yiiframework.id robot'],
                 'to' => $this->email,
-                'subject' => 'Activation account for piknikio',
+                'subject' => 'Activation account for yiiframework.id',
         ]);
     }
 }

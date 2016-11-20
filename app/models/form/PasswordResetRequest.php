@@ -48,9 +48,9 @@ class PasswordResetRequest extends Model
             return Yii::$app->queue->push('job/send-mail', [
                     'view' => ['html' => 'passwordResetToken-html', 'text' => 'passwordResetToken-text'],
                     'params' => ['user' => $user, 'token' => $token],
-                    'from' => [Yii::$app->params['supportEmail'] => 'piknikio robot'],
+                    'from' => [Yii::$app->params['supportEmail'] => 'yiiframework.id robot'],
                     'to' => $this->email,
-                    'subject' => 'Password reset for piknikio',
+                    'subject' => 'Password reset for yiiframework.id',
             ]);
         }
 

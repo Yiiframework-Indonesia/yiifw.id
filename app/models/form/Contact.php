@@ -49,11 +49,11 @@ class Contact extends Model
      */
     public function sendEmail($email)
     {
-        return Yii::$app->queue->push('job/send-mail', [
-            'from' => [$this->email => $this->name],
-            'to' => $email,
-            'subject' => $this->subject,
-            'textBody' => $this->body,
-        ]);
+        return Yii::$app->mailer->compose()
+            ->setFrom([$this->email => $this->name])
+            ->setTo($email)
+            ->setSubject($this->subject)
+            ->setTextBody($this->body)
+            ->send();
     }
 }

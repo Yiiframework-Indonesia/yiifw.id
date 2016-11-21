@@ -81,12 +81,10 @@ class Signup extends Model
             'rejectToken' => Yii::$app->tokenManager->generateToken(['reject', $user->id], 'activate.account'),
         ];
 
-       return Yii::$app->queue->push('job/send-mail', [
-                'view' => ['html' => 'activationAccount-html', 'text' => 'activationAccount-text'],
-                'params' => $params,
-                'from' => [Yii::$app->params['supportEmail'] => 'yiiframework.id robot'],
-                'to' => $this->email,
-                'subject' => 'Activation account for yiiframework.id',
-        ]);
+        return Yii::$app->mailer->compose(['html' => 'activationAccount-html', 'text' => 'activationAccount-text'], $params)
+                ->setFrom([Yii::$app->params['supportEmail'] => 'yiiframework.id robot'])
+                ->setTo($this->email)
+                ->setSubject('Activation account for yiiframework.id')
+                ->send();
     }
 }

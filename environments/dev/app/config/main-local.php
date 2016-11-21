@@ -28,10 +28,6 @@ return [
             'class' => 'yii\caching\DbCache',
             //'db' => ['dsn' => 'sqlite:@runtime/cache.sqlite']
         ],
-        'queue' => [
-            'class' => 'dee\queue\queues\DbQueue',
-            'module' => 'task',
-        ],
         'authClientCollection' => [
             'clients' => [
                 'google' => [

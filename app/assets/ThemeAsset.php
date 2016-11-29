@@ -27,7 +27,7 @@ class ThemeAsset extends AssetBundle{
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
         'app\assets\AppAsset',
-        //'rmrevin\yii\fontawesome\AssetBundle',
+        'rmrevin\yii\fontawesome\AssetBundle',
     ];
 
     public function init()

@@ -26,7 +26,8 @@
         "deesoft/yii2-tools": "~1.0",
         "mdmsoft/yii2-admin": "~2.0",
         "mdmsoft/yii2-upload-file": "~2.0",
-        "deesoft/yii2-queue": "^1.0@dev"
+        "deesoft/yii2-queue": "^1.0@dev",
+        "rmrevin/yii2-fontawesome": "~2.17"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0",

@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\ArrayHelper;
 
 return [
@@ -11,7 +12,7 @@ return [
     'modules' => [
         'task' => [
             'class' => 'task\Module',
-        ]
+        ],
     ],
     'components' => [
         'cache' => [
@@ -19,6 +20,12 @@ return [
         ],
         'tokenManager' => [
             'class' => 'app\classes\TokenManager'
+        ],
+        'view' => [
+            'theme' => [
+                'class' => 'app\components\Theme',
+                'theme' => 'yiid',
+            ],
         ],
         'authClientCollection' => [
             'class' => 'yii\authclient\Collection',
@@ -62,5 +69,5 @@ return [
             ],
         ],
     ],
-    //'language' => 'id-ID'
+        //'language' => 'id-ID'
 ];

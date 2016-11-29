@@ -47,6 +47,12 @@ return [
             'enablePrettyUrl' => true,
             'rules' => require 'url-rules.php',
         ],
+        'view' => [
+            'theme' => [
+                'class' => 'app\components\Theme',
+                'theme' => 'yiid',
+            ],
+        ],
         'request' => [
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',

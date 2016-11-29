@@ -21,12 +21,6 @@ return [
         'tokenManager' => [
             'class' => 'app\classes\TokenManager'
         ],
-        'view' => [
-            'theme' => [
-                'class' => 'app\components\Theme',
-                'theme' => 'yiid',
-            ],
-        ],
         'authClientCollection' => [
             'class' => 'yii\authclient\Collection',
             'clients' => [

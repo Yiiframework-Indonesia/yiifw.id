@@ -4,13 +4,17 @@
 /* @var $content string */
 
 use app\assets\AppAsset;
+use app\assets\ThemeAsset;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\widgets\Alert;
 
+Yii::$app->assetManager->forceCopy = true;
 AppAsset::register($this);
+ThemeAsset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

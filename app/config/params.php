@@ -7,5 +7,6 @@ return [
     'user.rememberMeDuration' => 3 * 24 * 3600,
     'dee.migration.path' => [
         '@mdm/upload/migrations',
+        '@mdm/admin/migrations/',
     ],
 ];

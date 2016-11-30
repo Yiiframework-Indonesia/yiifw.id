@@ -34,7 +34,7 @@ $ php init --env=Development --overwrite=n
 * Edit file `app/config/main-local.php`, ubah setingan untuk koneksi database.
 * Lakukan migrasi database
 ```
-$ php yii migrate
+$ php yii migrate -e=m160312_050000
 ```
 
 Setelah selesai, aplikasi dapat diakses dari `http://localhost/yiifwid/app/web/index.php`

@@ -32,11 +32,11 @@ use app\widgets\MenuAdmin;
                 <h3>Role User</h3>
                 <?php
                     $menuGeneral = [
-                        ['label' => 'Home', 'url' => ['/dashboard/users/index'], 'icon' => 'home'],
+                        ['label' => 'Home', 'url' => ['#'], 'icon' => 'home'],
                         ['label'  => 'Control Panel<span class="fa fa-chevron-down"></span>', 'url' => ['#'], 'icon' => 'wrench',
                             'items'   => [
-                                ['label' => 'User Accounts', 'url' => ['/ma/user/index']],
-                                ['label' => 'Systems', 'url' => ['/ma/systems/index']],
+                                ['label' => 'User Accounts', 'url' => ['#']],
+                                ['label' => 'Systems', 'url' => ['#']],
                             ],
                         ],
                         ['label'  => 'Help<span class="fa fa-chevron-down"></span>', 'url' => "#", 'icon' => 'question-circle ',

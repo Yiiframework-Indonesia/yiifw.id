@@ -1,6 +1,6 @@
 <?php
 
-namespace modules\event;
+namespace modules\admin\event;
 
 /**
  * Description of Module
@@ -10,7 +10,7 @@ namespace modules\event;
  */
 class Module extends \yii\base\Module
 {
-    public $controllerNamespace = 'modules\event\controllers';
+    public $controllerNamespace = 'modules\admin\event\controllers';
 
     public function init()
     {

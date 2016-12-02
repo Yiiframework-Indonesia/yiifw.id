@@ -12,10 +12,7 @@ return [
     'controllerNamespace' => 'app\controllers',
     'modules' => [
         'admin' => [
-            'class' => 'mdm\admin\Module'
-        ],
-        'event' => [
-            'class' => 'modules\event\Module',
+            'class' => 'modules\admin\Admin',
         ]
     ],
     'components' => [

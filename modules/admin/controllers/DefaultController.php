@@ -1,8 +1,8 @@
 <?php
 
-namespace modules\event\controllers;
+namespace modules\admin\controllers;
 
-use app\components\Controller;
+use yii\web\Controller;
 
 class DefaultController extends Controller
 {

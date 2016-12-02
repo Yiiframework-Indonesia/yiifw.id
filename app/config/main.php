@@ -4,7 +4,7 @@ use yii\helpers\ArrayHelper;
 
 return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
-    'name' => 'YiiFramework.id',
+    'name' => 'Piknikio',
     'aliases' => [
         '@app' => dirname(__DIR__),
         '@bower' => '@vendor/bower-asset',

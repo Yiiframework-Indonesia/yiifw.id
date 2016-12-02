@@ -13,6 +13,7 @@ return [
     'modules' => [
         'admin' => [
             'class' => 'modules\admin\Admin',
+             'layout' => '@app/themes/yiid/views/layouts/admin-main',
         ]
     ],
     'components' => [

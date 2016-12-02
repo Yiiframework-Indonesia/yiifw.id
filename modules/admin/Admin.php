@@ -5,7 +5,7 @@ namespace modules\admin;
 class Admin extends \yii\base\Module
 {
     public $controllerNamespace = 'modules\admin\controllers';
-
+     
     public function init()
     {
         parent::init();
@@ -17,8 +17,6 @@ class Admin extends \yii\base\Module
             ], 
             'admin' => [
                 'class' => 'mdm\admin\Module',
-                'layout' => '@app/themes/yiid/views/layouts/admin-main',
-
             ],
 
         ];

@@ -106,7 +106,16 @@ ThemeAsset::register($this);
 	</div>
 </footer>
 
-<?=$this->render('_copyright.php')?>
+<div class="copyright">
+	<div class="container">
+		<div class="col-md-6">
+			<p>&copy; Yii Framework Indonesia <?= date('Y') ?> - All Rights with reserved</p>	
+		</div>
+		<div class="col-md-6">
+			<p class="pull-right"><?= Yii::powered() ?></p>
+		</div>
+	</div>
+</div>
 
 <?php $this->endBody() ?>
 </body>

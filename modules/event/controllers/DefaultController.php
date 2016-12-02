@@ -2,7 +2,7 @@
 
 namespace modules\event\controllers;
 
-use yii\web\Controller;
+use app\components\Controller;
 
 class DefaultController extends Controller
 {

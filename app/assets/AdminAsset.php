@@ -19,11 +19,14 @@ class AdminAsset extends AssetBundle
 
     public $js = [
         'js/admin.js',
+        'js/gantelella.js',
     ];
 
     public $depends = [
-        'app\assets\AppAsset',
-        'app\assets\ThemeAsset',
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapPluginAsset',
+        'rmrevin\yii\fontawesome\AssetBundle',
+       
     ];
 
     public function init()

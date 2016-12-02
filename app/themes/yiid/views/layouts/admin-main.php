@@ -26,9 +26,9 @@ AdminAsset::register($this);
     <div class="container body">
 		<div class="main_container">
 
-			<?=$this->render('_admin-sidebar.php')?>
+		<?=$this->render('_admin-sidebar.php')?>
 
-			<?=$this->render('_admin-header.php')?>
+		<?=$this->render('_admin-header.php')?>
 
         	<!-- page content -->
 	    	<div class="right_col" role="main">
@@ -48,6 +48,7 @@ AdminAsset::register($this);
 				<?=$this->render('_copyright.php')?>
 			</footer>
 		</div>
+                <!-- /page content -->
 	</div>
 
 <?php $this->endBody() ?>

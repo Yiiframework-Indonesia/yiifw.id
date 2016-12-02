@@ -2,8 +2,10 @@
 
 use yii\helpers\Html;
 use app\widgets\MenuAdmin;
+use mdm\admin\components\MenuHelper;
 
 ?>
+
 <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
@@ -14,15 +16,24 @@ use app\widgets\MenuAdmin;
                 echo Html::a($header,Yii::$app->homeUrl, ['class' => 'site_title']);
             ?>
         </div>
-
+        
         <!-- menu profile quick info -->
-        <div class="profile">
+        <div class="profile" style="padding-bottom: 80px">
             <div class="profile_pic">
                 <?=Html::img('@web/img/default.jpg', ['class' => 'img-circle profile_img', 'alt' => '...'])?>
             </div>
             <div class="profile_info">
                 <span>Assalamu 'alaikum,</span>
-                <h2><?=Yii::$app->user->identity->profile->fullname?></h2>
+                <h2>
+                    <?php
+                    if (Yii::$app->user->isGuest) {
+                        Yii::$app->getResponse()->redirect(\Yii::$app->getUser()->loginUrl);
+                    } else {
+                        echo Yii::$app->user->identity->profile->fullname;
+                    }
+                    ?>
+                    
+                </h2>
             </div>
         </div>
 
@@ -31,15 +42,44 @@ use app\widgets\MenuAdmin;
             <div class="menu_section">
                 <h3>Role User</h3>
                 <?php
-                    $menuGeneral = [
+                
+                
+                    
+                $menuCallback = function($menu) {
+                    $item = [
+                        'label' => $menu['name'],
+                        'url' => MenuHelper::parseRoute($menu['route']),
+                    ];
+
+                    if($menu['name'] == NULL){
+                         $item = [
+                            'label' => 'Label Kosong',
+                            'url' => MenuHelper::parseRoute($menu['route']),
+                        ];
+                    }
+
+                    if (!empty($menu['data'])) {
+                        $item['icon'] = 'fa ' . $menu['data'];
+                    } else {
+                        $item['icon'] = 'fa fa-angle-double-right';
+                    }
+                    if ($menu['children'] != []) {
+                        $item['items'] = $menu['children'];
+                    }
+                    return $item;
+                };
+                $items = MenuHelper::getAssignedMenu(Yii::$app->user->id, null, $menuCallback);
+
+                $menuGeneral = [
                         ['label' => 'Home', 'url' => ['#'], 'icon' => 'home'],
-                        ['label'  => 'Control Panel<span class="fa fa-chevron-down"></span>', 'url' => ['#'], 'icon' => 'wrench',
+                        ['label' => 'Event', 'url' => ['/event/'], 'icon' => 'calendar'],
+                        ['label'  => 'Control Panel', 'url' => ['#'], 'icon' => 'wrench',
                             'items'   => [
                                 ['label' => 'User Accounts', 'url' => ['#']],
                                 ['label' => 'Systems', 'url' => ['#']],
                             ],
                         ],
-                        ['label'  => 'Help<span class="fa fa-chevron-down"></span>', 'url' => "#", 'icon' => 'question-circle ',
+                        ['label'  => 'Help', 'url' => "#", 'icon' => 'question-circle ',
                             'items'   => [
                                 ['label' => 'Faq', 'url' => ['#']],
                                 ['label' => 'About', 'url' => ['#']],
@@ -49,8 +89,6 @@ use app\widgets\MenuAdmin;
 
                     echo MenuAdmin::widget([
                         'items'   => $menuGeneral,
-                        'options' => ['class' => 'nav side-menu'],
-                        'submenuTemplate' => "\n<ul class='nav child_menu'>\n{items}\n</ul>\n",
                     ]);
                 ?>
             </div>

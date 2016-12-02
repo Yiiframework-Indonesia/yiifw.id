@@ -2,9 +2,9 @@
 
 namespace app\widgets;
 
-use rmrevin\yii\fontawesome\FontAwesome;
+use rmrevin\yii\fontawesome\component\Icon;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
+use yii\helpers\Html;
 use yii\widgets\Menu;
 
 /**
@@ -28,8 +28,31 @@ use yii\widgets\Menu;
  *  @since  1.0
  */
 
+
+/**
+ *  Change Render Item Function.
+ * 
+ *  @author Henry <alvin_vna@yahoo.com>
+ */
 class MenuAdmin extends Menu
-{
+{   
+    
+    /**
+     * @inheritdoc
+     */
+    public $labelTemplate = '{label}';
+    
+    /**
+     * @inheritdoc
+     */
+    public $linkTemplate = '<a href="{url}">{icon}<span>{label}</span>{badge}</a>';
+    
+    
+    /**
+     * @inheritdoc
+     */
+    public $submenuTemplate = "\n<ul class=\"nav child_menu\">\n{items}\n</ul>\n";
+    
     /**
      * Encode label
      *
@@ -58,8 +81,8 @@ class MenuAdmin extends Menu
      */
     public function init()
     {
+        Html::addCssClass($this->options, 'nav side-menu');
         parent::init();
-        $this->linkTemplate  = '<a href="{url}">{icon}{label}</a>';
     }
 
     /**
@@ -70,14 +93,29 @@ class MenuAdmin extends Menu
      */
     protected function renderItem($item)
     {
-        $template = ArrayHelper::getValue($item, 'template', $this->linkTemplate);
-        $url      = Url::to(ArrayHelper::getValue($item, 'url', '#'));
-        $icon     = empty($item['icon']) ? '' : FontAwesome::i($item['icon']);
-        unset($item['icon']);
-        return strtr($template, [
-            '{url}'   => $url,
-            '{label}' => $item['label'],
-            '{icon}'  => $icon,
-        ]);
+        $renderedItem = parent::renderItem($item);
+        if (isset($item['badge'])) {
+            $badgeOptions = ArrayHelper::getValue($item, 'badgeOptions', []);
+            Html::addCssClass($badgeOptions, 'label pull-right');
+        } else {
+            $badgeOptions = null;
+        }
+        return strtr(
+            $renderedItem,
+            [
+                '{icon}' => isset($item['icon'])
+                    ? new Icon($item['icon'], ArrayHelper::getValue($item, 'iconOptions', []))
+                    : '',
+                '{badge}' => (
+                    isset($item['badge'])
+                        ? Html::tag('small', $item['badge'], $badgeOptions)
+                        : ''
+                    ) . (
+                    isset($item['items']) && count($item['items']) > 0
+                        ? (new Icon('chevron-down'))->tag('span')
+                        : ''
+                    ),
+            ]
+        );
     }
 }

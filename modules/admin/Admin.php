@@ -18,6 +18,9 @@ class Admin extends \yii\base\Module
             'admin' => [
                 'class' => 'mdm\admin\Module',
             ],
+            'category' => [
+                'class' => 'modules\admin\category\category',
+            ],
 
         ];
     }

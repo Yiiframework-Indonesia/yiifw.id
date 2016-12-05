@@ -2,23 +2,23 @@
 
 namespace app\controllers;
 
-use Yii;
+use accessUser\models\User;
+use accessUser\models\UserProfile;
+use app\classes\AuthFilter;
+use app\classes\AuthHandler;
+use app\classes\GuestFilter;
+use app\classes\UploadImage;
+use app\models\form\ChangePassword;
+use app\models\form\ChangeUserEmail;
 use app\models\form\Login;
 use app\models\form\PasswordResetRequest;
 use app\models\form\ResetPassword;
 use app\models\form\Signup;
-use app\models\form\ChangePassword;
-use app\models\form\ChangeUserEmail;
-use app\models\ar\UserProfile;
-use app\models\ar\User;
+use Yii;
 use yii\base\InvalidParamException;
+use yii\filters\VerbFilter;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use app\classes\AuthFilter;
-use app\classes\GuestFilter;
-use app\classes\AuthHandler;
-use app\classes\UploadImage;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -33,19 +33,18 @@ class UserController extends Controller
     public function behaviors()
     {
         return [
-            'auth' => [
+            'auth'  => [
                 'class' => AuthFilter::className(),
-                'only' => ['logout', 'change-password', 'update-profile', 'update-user-email'],
+                'only'  => ['logout'],
             ],
             'guest' => [
                 'class' => GuestFilter::className(),
-                'only' => ['signup', 'reset-password', 'login', 'request-password-reset'],
+                'only'  => ['signup', 'reset-password', 'login', 'request-password-reset'],
             ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
-                    'upload-photo' => ['post'],
+                    'logout'       => ['post'],
                 ],
             ],
         ];
@@ -55,7 +54,7 @@ class UserController extends Controller
     {
         return [
             'auth' => [
-                'class' => 'yii\authclient\AuthAction',
+                'class'           => 'yii\authclient\AuthAction',
                 'successCallback' => [$this, 'onAuthSuccess'],
             ],
         ];
@@ -77,75 +76,9 @@ class UserController extends Controller
             return $this->goBack();
         } else {
             return $this->render('login', [
-                    'model' => $model,
+                'model' => $model,
             ]);
         }
-    }
-
-    public function actionProfile($id = null)
-    {
-        $model = UserProfile::findOne($id ? : Yii::$app->user->id);
-        if ($model) {
-            return $this->render('profile', [
-                    'model' => $model,
-            ]);
-        } elseif ($id == null) {
-            return $this->redirect(['update-profile']);
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
-    }
-
-    public function actionUploadPhoto()
-    {
-        $model = UserProfile::findOne(Yii::$app->user->id);
-        $photo_id = UploadImage::store('image', [
-                'width' => 400,
-                'height' => 400,
-        ]);
-        if ($photo_id !== false) {
-            $model->photo_id = $photo_id;
-            $model->save();
-        }
-        return $this->redirect(['profile']);
-    }
-
-    public function actionUpdateProfile()
-    {
-        $model = UserProfile::findOne(Yii::$app->user->id);
-        $model = $model ? : new UserProfile([
-            'id' => Yii::$app->user->id,
-        ]);
-        if ($model->load(Yii::$app->request->post())) {
-            $transaction = Yii::$app->db->beginTransaction();
-            try {
-                if ($model->save()) {
-                    $transaction->commit();
-                    return $this->redirect(['profile']);
-                }
-            } catch (\Exception $exc) {
-                $model->addError('', $exc->getMessage());
-            }
-            $transaction->rollBack();
-        }
-        return $this->render('update-profile', [
-                'model' => $model,
-        ]);
-    }
-
-    public function actionUpdateUserEmail()
-    {
-        $user = Yii::$app->user->identity;
-        $model = new ChangeUserEmail([
-            'username' => $user->username,
-            'email' => $user->email,
-        ]);
-        if ($model->load(Yii::$app->request->post()) && $model->change()) {
-            return $this->redirect(['profile']);
-        }
-        return $this->render('update-user-email', [
-                'model' => $model,
-        ]);
     }
 
     public function actionLogout()
@@ -168,7 +101,7 @@ class UserController extends Controller
         }
 
         return $this->render('signup', [
-                'model' => $model,
+            'model' => $model,
         ]);
     }
 
@@ -208,7 +141,7 @@ class UserController extends Controller
         }
 
         return $this->render('requestPasswordResetToken', [
-                'model' => $model,
+            'model' => $model,
         ]);
     }
 
@@ -227,19 +160,7 @@ class UserController extends Controller
         }
 
         return $this->render('resetPassword', [
-                'model' => $model,
-        ]);
-    }
-
-    public function actionChangePassword()
-    {
-        $model = new ChangePassword();
-        if ($model->load(Yii::$app->request->post()) && $model->change()) {
-            return $this->goHome();
-        }
-
-        return $this->render('change-password', [
-                'model' => $model,
+            'model' => $model,
         ]);
     }
 }

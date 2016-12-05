@@ -1,10 +1,10 @@
 <?php
 namespace app\models\form;
 
-use app\models\ar\User;
+use accessUser\models\User;
+use Yii;
 use yii\base\InvalidParamException;
 use yii\base\Model;
-use Yii;
 
 /**
  * Password reset form
@@ -20,7 +20,6 @@ class ResetPassword extends Model
     private $_user;
 
     private $_token;
-
 
     /**
      * Creates a form model given a token.
@@ -48,7 +47,7 @@ class ResetPassword extends Model
     public function rules()
     {
         return [
-            [['password','retypePassword'], 'required'],
+            [['password', 'retypePassword'], 'required'],
             ['password', 'string', 'min' => 6],
             [['retypePassword'], 'compare', 'compareAttribute' => 'password'],
         ];

@@ -2,8 +2,8 @@
 
 namespace app\models\form;
 
+use accessUser\models\User;
 use Yii;
-use app\models\ar\User;
 use yii\base\Model;
 
 /**
@@ -23,9 +23,9 @@ class PasswordResetRequest extends Model
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'exist',
-                'targetClass' => 'app\models\ar\User',
-                'filter' => ['status' => User::STATUS_ACTIVE],
-                'message' => 'There is no user with such email.'
+                'targetClass' => 'accessUser\models\User',
+                'filter'      => ['status' => User::STATUS_ACTIVE],
+                'message'     => 'There is no user with such email.',
             ],
         ];
     }
@@ -39,19 +39,19 @@ class PasswordResetRequest extends Model
     {
         /* @var $user User */
         $user = User::findOne([
-                'status' => User::STATUS_ACTIVE,
-                'email' => $this->email,
+            'status' => User::STATUS_ACTIVE,
+            'email'  => $this->email,
         ]);
 
         if ($user) {
             $token = Yii::$app->tokenManager->generateToken($user->id, 'reset.password', Yii::$app->params['user.passwordResetTokenExpire']);
             return Yii::$app->mailer->compose([
-                        'html' => 'passwordResetToken-html', 'text' => 'passwordResetToken-text'], [
-                        'user' => $user, 'token' => $token])
-                    ->setFrom([Yii::$app->params['supportEmail'] => 'yiiframework.id robot'])
-                    ->setTo($this->email)
-                    ->setSubject('Password reset for yiiframework.id')
-                    ->send();
+                'html' => 'passwordResetToken-html', 'text' => 'passwordResetToken-text'], [
+                'user' => $user, 'token' => $token])
+                ->setFrom([Yii::$app->params['supportEmail'] => 'yiiframework.id robot'])
+                ->setTo($this->email)
+                ->setSubject('Password reset for yiiframework.id')
+                ->send();
         }
 
         return false;

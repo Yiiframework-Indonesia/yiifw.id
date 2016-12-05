@@ -1,9 +1,9 @@
 <?php
 namespace app\models\form;
 
+use accessUser\models\User;
 use Yii;
 use yii\base\Model;
-use app\models\ar\User;
 use yii\web\UnauthorizedHttpException;
 
 /**
@@ -16,7 +16,6 @@ class Login extends Model
     public $rememberMe = true;
 
     private $_user = false;
-
 
     /**
      * @inheritdoc
@@ -66,9 +65,9 @@ class Login extends Model
 
     public function loginRest()
     {
-        if($this->validate()){
-            /* @var $device \app\models\ar\Device*/
-            $device = Yii::$app->getUser()->getIdentity();
+        if ($this->validate()) {
+            /* @var $device \accessUser\models\Device*/
+            $device          = Yii::$app->getUser()->getIdentity();
             $device->user_id = $this->getUser()->id;
             if ($device->save()) {
                 return $this->getUser();

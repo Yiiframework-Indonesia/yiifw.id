@@ -2,9 +2,9 @@
 
 namespace app\models\form;
 
+use accessUser\models\User;
+use accessUser\models\UserProfile;
 use Yii;
-use app\models\ar\User;
-use app\models\ar\UserProfile;
 use yii\base\Model;
 
 /**
@@ -27,14 +27,14 @@ class Signup extends Model
             ['username', 'required'],
             ['username', 'in', 'not' => true,
                 'range' => ['admin', 'administrator', 'superadmin', 'super', 'root']],
-            ['username', 'unique', 'targetClass' => '\app\models\ar\User', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => '\accessUser\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
             [['fullname'], 'required'],
             [['fullname'], 'string', 'min' => 3, 'max' => 255],
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'required'],
             ['email', 'email'],
-            ['email', 'unique', 'targetClass' => '\app\models\ar\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\accessUser\models\User', 'message' => 'This email address has already been taken.'],
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
         ];
@@ -48,23 +48,23 @@ class Signup extends Model
     public function signup()
     {
         if ($this->validate()) {
-            $user = new User();
+            $user           = new User();
             $user->username = $this->username;
-            $user->email = $this->email;
+            $user->email    = $this->email;
             $user->setPassword($this->password);
             $user->generateAuthKey();
             $user->status = $user::STATUS_PANDING;
-            return Yii::$app->getDb()->transaction(function() use($user) {
-                    if ($user->save()) {
-                        $profile = new UserProfile([
-                            'fullname' => $this->fullname,
-                        ]);
-                        $user->link('profile', $profile);
-                        $this->sendEmail($user);
-                        Yii::$app->session->setFlash('success', 'Registration success. Check your email');
-                        return $user;
-                    }
-                });
+            return Yii::$app->getDb()->transaction(function () use ($user) {
+                if ($user->save()) {
+                    $profile = new UserProfile([
+                        'fullname' => $this->fullname,
+                    ]);
+                    $user->link('profile', $profile);
+                    $this->sendEmail($user);
+                    Yii::$app->session->setFlash('success', 'Registration success. Check your email');
+                    return $user;
+                }
+            });
         }
 
         return null;
@@ -75,16 +75,16 @@ class Signup extends Model
         /* @var $mailer \yii\mail\BaseMailer */
         /* @var $message \yii\mail\BaseMessage */
         $params = [
-            'user' => $user,
+            'user'          => $user,
             'activateToken' => Yii::$app->tokenManager
                 ->generateToken(['activate', $user->id], 'activate.account', Yii::$app->params['user.activateExpire']),
-            'rejectToken' => Yii::$app->tokenManager->generateToken(['reject', $user->id], 'activate.account'),
+            'rejectToken'   => Yii::$app->tokenManager->generateToken(['reject', $user->id], 'activate.account'),
         ];
 
         return Yii::$app->mailer->compose(['html' => 'activationAccount-html', 'text' => 'activationAccount-text'], $params)
-                ->setFrom([Yii::$app->params['supportEmail'] => 'yiiframework.id robot'])
-                ->setTo($this->email)
-                ->setSubject('Activation account for yiiframework.id')
-                ->send();
+            ->setFrom([Yii::$app->params['supportEmail'] => 'yiiframework.id robot'])
+            ->setTo($this->email)
+            ->setSubject('Activation account for yiiframework.id')
+            ->send();
     }
 }

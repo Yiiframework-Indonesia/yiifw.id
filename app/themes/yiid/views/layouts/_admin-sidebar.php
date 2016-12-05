@@ -42,9 +42,7 @@ use mdm\admin\components\MenuHelper;
             <div class="menu_section">
                 <h3>Role User</h3>
                 <?php
-                
-                
-                    
+
                 $menuCallback = function($menu) {
                     $item = [
                         'label' => $menu['name'],

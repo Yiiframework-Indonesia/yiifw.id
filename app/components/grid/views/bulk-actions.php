@@ -9,7 +9,7 @@ use yii\web\View;
 
 ?>
 <div class="<?= $this->context->wrapperClass ?>">
-
+    
     <?= Html::dropDownList(
         'grid-bulk-actions',
         null,
@@ -24,6 +24,7 @@ use yii\web\View;
 
     <?= Html::tag('span', 'OK', [
         'class' => "grid-bulk-ok-button {$this->context->okButtonClass} disabled",
+        'style' =>['margin-top'=>'3px'],        
         'id' => "{$this->context->gridId}-ok-button",
         'data-list' => "#{$this->context->gridId}-bulk-actions",
         'data-pjax' => "#{$this->context->pjaxId}",

@@ -119,6 +119,7 @@ class TitleActionColumn extends \yii\grid\DataColumn
                     'title' =>  'View',
                     'aria-label' => 'View',
                     'data-pjax' => '0',
+                   
                 ], $this->buttonOptions);
                 return Html::a('View', $url, $options);
             };
@@ -129,6 +130,7 @@ class TitleActionColumn extends \yii\grid\DataColumn
                     'title' => 'Edit',
                     'aria-label' => 'Edit',
                     'data-pjax' => '0',
+                     'class'=>'btn btn-info btn-xs',
                 ], $this->buttonOptions);
                 return Html::a('Edit', $url, $options);
             };
@@ -141,6 +143,7 @@ class TitleActionColumn extends \yii\grid\DataColumn
                     'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
                     'data-method' => 'post',
                     'data-pjax' => '0',
+                    'class'=>'btn btn-danger btn-xs',
                 ], $this->buttonOptions);
 
                 return Html::a('Delete', $url, $options);

@@ -20,6 +20,6 @@ use yii\web\View;
     <?= Html::dropDownList('grid-page-size',
         Yii::$app->request->cookies->getValue('_grid_page_size', 20),
         $this->context->dropDownOptions,
-        ['class' => 'form-control input-sm']
+        ['class' => 'form-control input-sm','style'=>['margin-right'=>'10px']]
     ) ?>
 </div>

@@ -14,6 +14,7 @@ class Admin extends \yii\base\Module
         Yii::setAlias('@accessUser', dirname(dirname(__DIR__)) . '/modules/admin/accessUser');
 
         parent::init();
+        
         //set default route
         $this->defaultRoute = 'access-user';
 
@@ -27,6 +28,9 @@ class Admin extends \yii\base\Module
             ],
             'admin' => [
                 'class' => 'mdm\admin\Module',
+            ],
+            'category' => [
+                'class' => 'modules\admin\category\category',
             ],
         ];
     }

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2aba0d3f821c8085e45ab1affa420409",
-    "content-hash": "0f10d24077132ed33287259e8ee4cbbb",
+    "hash": "6bd02225f33cbbb7ef888628d96f4210",
+    "content-hash": "5d0f72f6bacd75bf6e2f63a4daf7e67b",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -181,12 +181,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/deesoft/yii2-console.git",
-                "reference": "5d7f3cb6cc5e810cd63c41cb27c6f6ff144cd449"
+                "reference": "bd354d466f764bcbba7f4c0a4b3aa33f1b96500f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/deesoft/yii2-console/zipball/5d7f3cb6cc5e810cd63c41cb27c6f6ff144cd449",
-                "reference": "5d7f3cb6cc5e810cd63c41cb27c6f6ff144cd449",
+                "url": "https://api.github.com/repos/deesoft/yii2-console/zipball/bd354d466f764bcbba7f4c0a4b3aa33f1b96500f",
+                "reference": "bd354d466f764bcbba7f4c0a4b3aa33f1b96500f",
                 "shasum": ""
             },
             "require": {
@@ -221,7 +221,7 @@
                 "migration",
                 "yii2"
             ],
-            "time": "2016-11-08 16:24:39"
+            "time": "2016-12-05 03:50:15"
         },
         {
             "name": "deesoft/yii2-queue",
@@ -619,12 +619,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mdmsoft/yii2-admin.git",
-                "reference": "624338912074ce7c218f838a940fbfed05ae47db"
+                "reference": "13de4624a0e46d8341d3461f81046f39a6459836"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mdmsoft/yii2-admin/zipball/624338912074ce7c218f838a940fbfed05ae47db",
-                "reference": "624338912074ce7c218f838a940fbfed05ae47db",
+                "url": "https://api.github.com/repos/mdmsoft/yii2-admin/zipball/13de4624a0e46d8341d3461f81046f39a6459836",
+                "reference": "13de4624a0e46d8341d3461f81046f39a6459836",
                 "shasum": ""
             },
             "require": {
@@ -669,7 +669,7 @@
                 "rbac",
                 "yii"
             ],
-            "time": "2016-11-09 23:09:47"
+            "time": "2016-12-01 03:31:21"
         },
         {
             "name": "mdmsoft/yii2-upload-file",
@@ -717,6 +717,52 @@
                 "yii"
             ],
             "time": "2016-11-07 09:01:26"
+        },
+        {
+            "name": "paulzi/yii2-nested-intervals",
+            "version": "v1.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paulzi/yii2-nested-intervals.git",
+                "reference": "c003bb0fe95d2b31b7d75fddcb41322038bd8c45"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paulzi/yii2-nested-intervals/zipball/c003bb0fe95d2b31b7d75fddcb41322038bd8c45",
+                "reference": "c003bb0fe95d2b31b7d75fddcb41322038bd8c45",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "~2.0.0"
+            },
+            "require-dev": {
+                "phpunit/dbunit": "~1.0",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "paulzi\\nestedintervals\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PaulZi",
+                    "email": "pavel.zimakoff@gmail.com"
+                }
+            ],
+            "description": "Nested Intervals Behavior for Yii2",
+            "keywords": [
+                "nested intervals",
+                "nested sets",
+                "yii2"
+            ],
+            "time": "2016-10-13 22:33:11"
         },
         {
             "name": "rmrevin/yii2-fontawesome",
@@ -878,12 +924,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "ffb27dc564d636880b412bf2d2e6ad08b8db386e"
+                "reference": "4671badd919af7f7637d347c09809c767808b2af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/ffb27dc564d636880b412bf2d2e6ad08b8db386e",
-                "reference": "ffb27dc564d636880b412bf2d2e6ad08b8db386e",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/4671badd919af7f7637d347c09809c767808b2af",
+                "reference": "4671badd919af7f7637d347c09809c767808b2af",
                 "shasum": ""
             },
             "require": {
@@ -964,7 +1010,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2016-11-29 08:24:39"
+            "time": "2016-12-05 20:33:49"
         },
         {
             "name": "yiisoft/yii2-authclient",
@@ -1070,12 +1116,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-composer.git",
-                "reference": "e882cc327a6935a41f2e8665b9ef0317f6852d4d"
+                "reference": "c6a294f01630e89f8ccc6209edb9ed8fbf008ac4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/e882cc327a6935a41f2e8665b9ef0317f6852d4d",
-                "reference": "e882cc327a6935a41f2e8665b9ef0317f6852d4d",
+                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/c6a294f01630e89f8ccc6209edb9ed8fbf008ac4",
+                "reference": "c6a294f01630e89f8ccc6209edb9ed8fbf008ac4",
                 "shasum": ""
             },
             "require": {
@@ -1109,7 +1155,7 @@
                 "extension installer",
                 "yii2"
             ],
-            "time": "2016-06-05 20:34:32"
+            "time": "2016-12-02 17:13:38"
         },
         {
             "name": "yiisoft/yii2-httpclient",
@@ -1262,12 +1308,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-swiftmailer.git",
-                "reference": "decd3ea203b8c4e682068e656dc23f4a32f13b4f"
+                "reference": "c86c5ee2464ebf8c9f9adc2978193a9a2771b9c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-swiftmailer/zipball/decd3ea203b8c4e682068e656dc23f4a32f13b4f",
-                "reference": "decd3ea203b8c4e682068e656dc23f4a32f13b4f",
+                "url": "https://api.github.com/repos/yiisoft/yii2-swiftmailer/zipball/c86c5ee2464ebf8c9f9adc2978193a9a2771b9c9",
+                "reference": "c86c5ee2464ebf8c9f9adc2978193a9a2771b9c9",
                 "shasum": ""
             },
             "require": {
@@ -1304,7 +1350,7 @@
                 "swiftmailer",
                 "yii2"
             ],
-            "time": "2016-11-24 11:42:41"
+            "time": "2016-11-30 11:55:45"
         }
     ],
     "packages-dev": [
@@ -1379,12 +1425,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "9722bbea1029082af5f518665c04980efe585590"
+                "reference": "71c5ccec1b04649c26b7fa510b1cc6b811cb3fb9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/9722bbea1029082af5f518665c04980efe585590",
-                "reference": "9722bbea1029082af5f518665c04980efe585590",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/71c5ccec1b04649c26b7fa510b1cc6b811cb3fb9",
+                "reference": "71c5ccec1b04649c26b7fa510b1cc6b811cb3fb9",
                 "shasum": ""
             },
             "require": {
@@ -1421,7 +1467,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2016-11-29 13:46:42"
+            "time": "2016-12-02 14:05:09"
         },
         {
             "name": "phpspec/php-diff",
@@ -1514,17 +1560,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-faker.git",
-                "reference": "6e6eb430809e3f9c05e367303909a05a4912d4c0"
+                "reference": "8a406289c3af4da5e0092a96b37734dc1a16a43b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-faker/zipball/6e6eb430809e3f9c05e367303909a05a4912d4c0",
-                "reference": "6e6eb430809e3f9c05e367303909a05a4912d4c0",
+                "url": "https://api.github.com/repos/yiisoft/yii2-faker/zipball/8a406289c3af4da5e0092a96b37734dc1a16a43b",
+                "reference": "8a406289c3af4da5e0092a96b37734dc1a16a43b",
                 "shasum": ""
             },
             "require": {
                 "fzaninotto/faker": "~1.4",
-                "yiisoft/yii2": "*"
+                "yiisoft/yii2": "~2.0.0"
             },
             "type": "yii2-extension",
             "extra": {
@@ -1553,7 +1599,7 @@
                 "faker",
                 "yii2"
             ],
-            "time": "2016-04-14 08:47:34"
+            "time": "2016-12-02 21:11:03"
         },
         {
             "name": "yiisoft/yii2-gii",

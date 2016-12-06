@@ -28,6 +28,7 @@
         "mdmsoft/yii2-upload-file": "~2.0",
         "deesoft/yii2-queue": "^1.0@dev",
         "rmrevin/yii2-fontawesome": "~2.17",
+        "paulzi/yii2-nested-intervals" : "^1.0",
         "yiisoft/yii2-imagine": "^2.1",
         "kartik-v/yii2-tabs-x": "*"
     },

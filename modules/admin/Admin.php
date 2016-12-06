@@ -12,6 +12,7 @@ class Admin extends \yii\base\Module
     {
         //set alias module (biar namespace tidak terlalu panjang)
         Yii::setAlias('@accessUser', dirname(dirname(__DIR__)) . '/modules/admin/accessUser');
+        Yii::setAlias('@category', dirname(dirname(__DIR__)) . '/modules/admin/category');
 
         parent::init();
         
@@ -30,7 +31,7 @@ class Admin extends \yii\base\Module
                 'class' => 'mdm\admin\Module',
             ],
             'category' => [
-                'class' => 'modules\admin\category\category',
+                'class' => 'category\Module',
             ],
         ];
     }

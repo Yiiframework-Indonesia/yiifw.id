@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use modules\admin\category\models\PostCategory as Category;
+use category\models\PostCategory as Category;
 
 /* @var $this yii\web\View */
 /* @var $model modules\admin\category\models\PostCategory */

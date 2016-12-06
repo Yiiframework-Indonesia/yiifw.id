@@ -1,11 +1,11 @@
 <?php
 
-namespace modules\admin\category\models;
+namespace category\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use modules\admin\category\models\PostCategory;
+use category\models\PostCategory;
 
 /**
  * PostCategorySearch represents the model behind the search form about `modules\admin\category\models\PostCategory`.
@@ -45,9 +45,9 @@ class PostCategorySearch extends PostCategory
 
        $dataProvider = new ActiveDataProvider([
             'query' => $query,
-//            'pagination' => [
-//                'pageSize' => Yii::$app->request->cookies->getValue('_grid_page_size', 20),
-//            ],
+            'pagination' => [
+                'pageSize' => Yii::$app->request->cookies->getValue('_grid_page_size', 20),
+            ],
             'sort' => [
                 'defaultOrder' => [
                     'id' => SORT_DESC,

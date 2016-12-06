@@ -3,11 +3,12 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
+use yii\helpers\ArrayHelper;
 
 use app\components\grid\GridView;
 use app\components\grid\GridPageSize;
 
-use modules\admin\category\models\PostCategory;
+use category\models\PostCategory;
 /* @var $this yii\web\View */
 /* @var $searchModel modules\admin\category\models\PostCategorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -31,6 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     
+   <?php
+        app\widgets\Panel::begin()
+    ?> 
     <div class="row">
                 <div class="col-sm-12 text-right">
                     <?= GridPageSize::widget(['pjaxId' => 'post-category-grid-pjax']) ?>
@@ -41,6 +45,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'id' => 'post-category-grid',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'tableOptions' => [
+            'class'=>'table table-striped table-hover'
+        ],
         'bulkActionOptions' => [
                     'gridId' => 'post-category-grid',
                     'actions' => [Url::to(['bulk-delete']) =>  'Delete']
@@ -50,9 +57,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\CheckboxColumn', 'options' => ['style' => 'width:10px']],
             [
                         'class' => 'app\components\grid\columns\TitleActionColumn',
-                        'controller' => '/post/category',
+                        'controller' => '/admin/category/category',
                         'title' => function (PostCategory $model) {
-                            return Html::a($model->title, ['/post/category/update', 'id' => $model->id], ['data-pjax' => 0]);
+                            return Html::a($model->title, ['/category/update', 'id' => $model->id], ['data-pjax' => 0]);
                         },
                         'buttonsTemplate' => '{update} {delete}',
             ],
@@ -61,14 +68,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         'value' => function (PostCategory $model) {
 
                             if ($parent = $model->getParent()->one() AND $parent->id > 1) {
-                                return Html::a($parent->title, ['/admin/category/default/update', 'id' => $parent->id], ['data-pjax' => 0]);
+                                return Html::a($parent->title, ['/category/update', 'id' => $parent->id], ['data-pjax' => 0]);
                             } else {
                                 return '<span class="not-set">' . Yii::t('yii', '(not set)') . '</span>';
                             }
 
                         },
                         'format' => 'raw',
-                        'filter' => PostCategory::getCategories(),
+                        'filter' => Html::activeDropDownList($searchModel, 'parent_id', ArrayHelper::map(PostCategory::getCategories(), 'id', 'title'),['class'=>'form-control','prompt' => 'Select Category']),
                         'filterInputOptions' => ['class' => 'form-control', 'encodeSpaces' => true],
             ],
             'description:ntext',
@@ -81,5 +88,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
     <?php Pjax::end() ?>
+    <?php app\widgets\Panel::end()?>
     <?php app\widgets\Panel::end()?>
 </div>

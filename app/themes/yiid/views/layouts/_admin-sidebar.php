@@ -18,7 +18,7 @@ use mdm\admin\components\MenuHelper;
         </div>
         
         <!-- menu profile quick info -->
-        <div class="profile" style="padding-bottom: 80px">
+        <div class="profile" style="padding-bottom: 80px;margin-bottom: 80px">
             <div class="profile_pic">
                 <?php $profile = Yii::$app->user->identity->profile;
                     if($profile && $profile->photo_id) {
@@ -47,7 +47,7 @@ use mdm\admin\components\MenuHelper;
         <!-- sidebar menu -->
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
-                <h3>Role User</h3>
+                
                 <?php
 
                 $menuCallback = function($menu) {
@@ -77,6 +77,12 @@ use mdm\admin\components\MenuHelper;
 
                 $menuGeneral = [
                         ['label' => 'Home', 'url' => ['#'], 'icon' => 'home'],
+                        ['label'  => 'Posts', 'url' => ['#'], 'icon' => 'pencil',
+                            'items'   => [
+                                ['label' => 'Post', 'url' => ['#']],
+                                ['label' => 'Categories', 'url' => ['/admin/category']],
+                            ],
+                        ],
                         ['label' => 'Event', 'url' => ['/event/'], 'icon' => 'calendar'],
                         ['label'  => 'Control Panel', 'url' => ['#'], 'icon' => 'wrench',
                             'items'   => [

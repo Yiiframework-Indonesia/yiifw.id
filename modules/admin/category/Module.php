@@ -1,22 +1,23 @@
 <?php
 
-namespace modules\admin\category;
+namespace category;
 
 /**
  * category module definition class
  */
-class category extends \yii\base\Module
+class Module extends \yii\base\Module
 {
     /**
      * @inheritdoc
      */
-    public $controllerNamespace = 'modules\admin\category\controllers';
+    public $controllerNamespace = 'category\controllers';
 
     /**
      * @inheritdoc
      */
     public function init()
     {
+        $this->defaultRoute = 'category';
         parent::init();
 
         // custom initialization code goes here

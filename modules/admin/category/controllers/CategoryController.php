@@ -1,18 +1,20 @@
 <?php
 
-namespace modules\admin\category\controllers;
+namespace category\controllers;
 
 use Yii;
-use modules\admin\category\models\PostCategory;
-use modules\admin\category\models\PostCategorySearch;
+use yii\web\Cookie;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use category\models\PostCategory;
+use category\models\PostCategorySearch;
+
 /**
- * Default controller for the `category` module
+ * Category controller for the `category` module
  */
-class DefaultController extends Controller
+class CategoryController extends Controller
 {
     public function behaviors()
     {
@@ -116,6 +118,39 @@ class DefaultController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+    
+    /**
+     * Delete all selected grid items
+     */
+    public function actionBulkDelete()
+    {
+        if (Yii::$app->request->post('selection')) {
+           
+            foreach (Yii::$app->request->post('selection', []) as $id) {
+                $where = ['id' => $id];
+                
+                $model = PostCategory::findOne($where);
+
+                if ($model) $model->delete();
+            }
+        }
+    }
+    
+    /**
+     * Set page size for grid
+     */
+    public function actionGridPageSize()
+    {
+        if (Yii::$app->request->post('grid-page-size')) {
+            $cookie = new Cookie([
+                'name' => '_grid_page_size',
+                'value' => Yii::$app->request->post('grid-page-size'),
+                'expire' => time() + 86400 * 365, // 1 year
+            ]);
+
+            Yii::$app->response->cookies->add($cookie);
         }
     }
 }

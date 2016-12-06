@@ -1,6 +1,6 @@
 <?php
 
-namespace modules\admin\category\models;
+namespace category\models;
 
 
 use paulzi\nestedintervals\NestedIntervalsBehavior;

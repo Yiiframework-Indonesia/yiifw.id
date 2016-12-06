@@ -1,10 +1,10 @@
 <?php
 
-namespace app\models\ar;
+namespace accessUser\models;
 
+use mdm\upload\FileModel;
 use Yii;
 use yii\helpers\Url;
-use mdm\upload\FileModel;
 
 /**
  * This is the model class for table "user_profile".
@@ -48,7 +48,7 @@ class UserProfile extends \yii\db\ActiveRecord
             [['user_id'], 'integer'],
             [['birth_day'], 'safe'],
             [['bio'], 'string'],
-            [['file'], 'file', 'extensions'=>['jpg', 'jpeg', 'png']],
+            [['file'], 'file', 'extensions' => ['jpg', 'jpeg', 'png']],
             [['fullname', 'avatar', 'gender', 'address'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -60,14 +60,14 @@ class UserProfile extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'user_id' => 'User ID',
-            'fullname' => 'Fullname',
-            'photo_id' => 'Photo ID',
-            'avatar' => 'Avatar',
-            'gender' => 'Gender',
-            'address' => 'Address',
-            'birth_day' => 'Birth Day',
-            'bio' => 'Bio',
+            'user_id'    => 'User ID',
+            'fullname'   => 'Fullname',
+            'photo_id'   => 'Photo ID',
+            'avatar'     => 'Avatar',
+            'gender'     => 'Gender',
+            'address'    => 'Address',
+            'birth_day'  => 'Birth Day',
+            'bio'        => 'Bio',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -76,7 +76,7 @@ class UserProfile extends \yii\db\ActiveRecord
     public function afterSave($insert, $changedAttributes)
     {
         parent::afterSave($insert, $changedAttributes);
-        if(!$insert && isset($changedAttributes['photo_id']) && ($model = FileModel::findOne($changedAttributes['photo_id'])) !== null){
+        if (!$insert && isset($changedAttributes['photo_id']) && ($model = FileModel::findOne($changedAttributes['photo_id'])) !== null) {
             $model->delete();
         }
     }
@@ -99,7 +99,7 @@ class UserProfile extends \yii\db\ActiveRecord
         }
         return $this->avatar;
     }
-    
+
     /**
      * @return string
      */
@@ -122,15 +122,15 @@ class UserProfile extends \yii\db\ActiveRecord
      */
     public function getContacts()
     {
-        return $this->hasMany(UserContact::className(), ['user_id'=>'user_id']);
+        return $this->hasMany(UserContact::className(), ['user_id' => 'user_id']);
     }
 
     public function behaviors()
     {
-        return[
+        return [
             \yii\behaviors\TimestampBehavior::className(),
             [
-                'class' => 'mdm\upload\UploadBehavior',
+                'class'          => 'mdm\upload\UploadBehavior',
                 'savedAttribute' => 'photo_id',
             ],
         ];

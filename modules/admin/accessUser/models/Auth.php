@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\ar;
+namespace accessUser\models;
 
 use Yii;
 
@@ -42,9 +42,9 @@ class Auth extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
-            'source' => 'Source',
+            'id'        => 'ID',
+            'user_id'   => 'User ID',
+            'source'    => 'Source',
             'source_id' => 'Source ID',
         ];
     }
@@ -54,6 +54,6 @@ class Auth extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(User::className(),['id'=>'user_id']);
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 }

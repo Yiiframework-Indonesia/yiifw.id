@@ -2603,9 +2603,28 @@ ul.parsley-errors-list {
     padding-left: 0;
 }
 
-input.parsley-error, textarea.parsley-error, select.parsley-error {
+/* Color of invalid field */
+.has-error .control-label,
+.has-error .help-block,
+.has-error .form-control-feedback {
+    color: #E74C3C;
+}
+
+.has-error input, .has-error textarea, .has-error select {
     background: #FAEDEC;
-    border: 1px solid #E85445;
+}
+
+.has-error .form-control, .has-error .form-control:focus {
+    border-color: #E74C3C;
+}
+
+/* Color of valid field */
+.has-success .form-control, .has-success .form-control:focus {
+    border-color: #2BB23D;
+}
+
+.has-success .form-control-feedback, .has-success .help-block, .has-success .control-label, .has-success .radio, .has-success .checkbox, .has-success .radio-inline, .has-success .checkbox-inline, .has-success.radio label, .has-success.checkbox label, .has-success.radio-inline label, .has-success.checkbox-inline label {
+    color: #2BB23D;
 }
 
 .btn-group .parsley-errors-list {

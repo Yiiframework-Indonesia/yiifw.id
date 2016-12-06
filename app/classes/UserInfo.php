@@ -24,20 +24,20 @@ class UserInfo extends Behavior
             return;
         }
         $this->_profile = [];
-        /* @var $identity \app\models\ar\User */
+        /* @var $identity \accessUser\models\User */
         if (($identity = $this->owner->identity) !== null) {
             if (($profile = $identity->profile) !== null) {
                 $this->_profile = [
-                    'fullname' => $profile->fullname,
-                    'address' => $profile->address,
-                    'bio' => $profile->bio,
-                    'gender' => $profile->gender,
+                    'fullname'  => $profile->fullname,
+                    'address'   => $profile->address,
+                    'bio'       => $profile->bio,
+                    'gender'    => $profile->gender,
                     'avatarUrl' => $profile->avatarUrl,
                 ];
             }
             $this->_profile['username'] = $identity->username;
-            $this->_profile['email'] = $identity->email;
-            $this->_profile['company'] = $identity->company;
+            $this->_profile['email']    = $identity->email;
+            $this->_profile['company']  = $identity->company;
         }
     }
 

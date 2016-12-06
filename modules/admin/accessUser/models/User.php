@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\ar;
+namespace accessUser\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -22,14 +22,13 @@ use yii\web\IdentityInterface;
  * @property string $password write-only password
  *
  * @property UserProfile $profile
- * @property Company $company
  * @property UserContact[] $contacts
  */
 class User extends ActiveRecord implements IdentityInterface
 {
-    const STATUS_PANDING = 0;
-    const STATUS_ACTIVE = 10;
-    const STATUS_DELETED = 20;
+    const STATUS_PANDING    = 0;
+    const STATUS_ACTIVE     = 10;
+    const STATUS_DELETED    = 20;
     const SCENARIO_INIT_CMD = 'init_via_command';
 
     /**
@@ -37,7 +36,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function tableName()
     {
-        return '{{%user}}';
+        return 'user';
     }
 
     /**
@@ -90,9 +89,9 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findByUsername($username)
     {
         return static::find()
-                ->where(['status' => self::STATUS_ACTIVE])
-                ->andWhere(['OR', ['username' => $username], ['email' => $username]])
-                ->one();
+            ->where(['status' => self::STATUS_ACTIVE])
+            ->andWhere(['OR', ['username' => $username], ['email' => $username]])
+            ->one();
     }
 
     /**
@@ -110,7 +109,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public static function getUniqueUsername($username)
     {
-        $i = 1;
+        $i    = 1;
         $name = $username;
         while (static::find()->where(['username' => $name])->exists()) {
             $name = $username . $i++;
@@ -182,16 +181,23 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCompany()
-    {
-        return $this->hasOne(Company::className(), ['user_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getContacts()
     {
         return $this->hasMany(UserContact::className(), ['user_id' => 'id']);
+    }
+
+    public static function getStatusView($code = null)
+    {
+        $_items = [
+            self::STATUS_PANDING => 'Inactive',
+            self::STATUS_ACTIVE   => 'Active',
+            self::STATUS_DELETED   => 'Banned',
+        ];
+        if (isset($code)) {
+            return isset($_items[$code]) ? $_items[$code] : false;
+        } else {
+            return isset($_items) ? $_items : false;
+        }
+
     }
 }

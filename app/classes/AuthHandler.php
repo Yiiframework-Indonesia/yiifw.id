@@ -2,11 +2,11 @@
 
 namespace app\classes;
 
+use accessUser\models\Auth;
+use accessUser\models\User;
+use accessUser\models\UserContact;
+use accessUser\models\UserProfile;
 use Yii;
-use app\models\ar\Auth;
-use app\models\ar\User;
-use app\models\ar\UserProfile;
-use app\models\ar\UserContact;
 use yii\authclient\ClientInterface;
 use yii\helpers\ArrayHelper;
 
@@ -31,37 +31,39 @@ class AuthHandler
     public function handle()
     {
         $attributes = $this->client->getUserAttributes();
-        $email = ArrayHelper::getValue($attributes, 'email');
-        $id = ArrayHelper::getValue($attributes, 'id');
-        $username = isset($attributes['nickname']) ? $attributes['nickname'] : explode('@', $email)[0];
+        $email      = ArrayHelper::getValue($attributes, 'email');
+        $id         = ArrayHelper::getValue($attributes, 'id');
+        $username   = isset($attributes['nickname']) ? $attributes['nickname'] : explode('@', $email)[0];
         if (in_array($username, ['admin', 'administrator', 'superadmin', 'super', 'root'])) {
             $username = 'no_' . $username;
         }
         $username = User::getUniqueUsername($username);
         /* @var Auth $auth */
         $auth = Auth::find()->where([
-                'source' => $this->client->getId(),
-                'source_id' => $id,
-            ])->one();
+            'source'    => $this->client->getId(),
+            'source_id' => $id,
+        ])->one();
 
         if (Yii::$app->user->isGuest) {
-            if ($auth) { // login
+            if ($auth) {
+                // login
                 /* @var $user User */
                 $user = $auth->user;
                 $this->updateUserInfo($user);
                 Yii::$app->user->login($user, Yii::$app->params['user.rememberMeDuration']);
-            } else { // signup
+            } else {
+                // signup
                 if ($email !== null && User::find()->where(['email' => $email])->exists()) {
                     Yii::$app->getSession()->setFlash('error', [
                         Yii::t('app', "User with the same email as in {client} account already exists but isn't linked to it. Login using email first to link it.", ['client' => $this->client->getTitle()]),
                     ]);
                 } else {
                     $password = Yii::$app->security->generateRandomString(6);
-                    $user = new User([
+                    $user     = new User([
                         'username' => $username,
-                        'email' => $email,
+                        'email'    => $email,
                         'password' => $password,
-                        'status' => User::STATUS_ACTIVE,
+                        'status'   => User::STATUS_ACTIVE,
                     ]);
                     $user->generateAuthKey();
 
@@ -70,8 +72,8 @@ class AuthHandler
                     if ($user->save()) {
                         $this->updateUserInfo($user);
                         $auth = new Auth([
-                            'user_id' => $user->id,
-                            'source' => $this->client->getId(),
+                            'user_id'   => $user->id,
+                            'source'    => $this->client->getId(),
                             'source_id' => (string) $id,
                         ]);
                         if ($auth->save()) {
@@ -95,11 +97,12 @@ class AuthHandler
                     }
                 }
             }
-        } else { // user already logged in
+        } else {
+            // user already logged in
             if (!$auth) { // add auth provider
                 $auth = new Auth([
-                    'user_id' => Yii::$app->user->id,
-                    'source' => $this->client->getId(),
+                    'user_id'   => Yii::$app->user->id,
+                    'source'    => $this->client->getId(),
                     'source_id' => (string) $attributes['id'],
                 ]);
                 if ($auth->save()) {
@@ -108,7 +111,7 @@ class AuthHandler
                     $this->updateUserInfo($user);
                     Yii::$app->getSession()->setFlash('success', [
                         Yii::t('app', 'Linked {client} account.', [
-                            'client' => $this->client->getTitle()
+                            'client' => $this->client->getTitle(),
                         ]),
                     ]);
                 } else {
@@ -119,7 +122,8 @@ class AuthHandler
                         ]),
                     ]);
                 }
-            } else { // there's existing auth
+            } else {
+                // there's existing auth
                 Yii::$app->getSession()->setFlash('error', [
                     Yii::t('app', 'Unable to link {client} account. There is another user using it.', ['client' => $this->client->getTitle()]),
                 ]);
@@ -133,12 +137,12 @@ class AuthHandler
     private function updateUserInfo(User $user)
     {
         $attributes = $this->client->getUserAttributes();
-        $profile = $user->profile;
+        $profile    = $user->profile;
         if ($profile === null) {
             $profile = new UserProfile([
-                'user_id' => $user->id,
+                'user_id'  => $user->id,
                 'fullname' => $attributes['name'],
-                'avatar' => $attributes['avatar'],
+                'avatar'   => $attributes['avatar'],
             ]);
             $user->link('profile', $profile);
         } else {
@@ -150,9 +154,9 @@ class AuthHandler
         if (UserContact::findOne(['user_id' => $user->id, 'type' => 'profile', 'name' => $this->client->getId()]) === null) {
             $contact = new UserContact([
                 'user_id' => $user->id,
-                'type' => 'profile',
-                'name' => $this->client->getId(),
-                'value' => isset($attributes['profile']) ? $attributes['profile'] : null,
+                'type'    => 'profile',
+                'name'    => $this->client->getId(),
+                'value'   => isset($attributes['profile']) ? $attributes['profile'] : null,
             ]);
             $user->link('contacts', $contact);
         }

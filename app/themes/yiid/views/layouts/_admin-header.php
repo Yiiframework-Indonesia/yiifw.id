@@ -9,19 +9,15 @@ use rmrevin\yii\fontawesome\FontAwesome;
 <div class="top_nav">
 	<div class="nav_menu">
 
-                <?php 
-               
-                    
-                NavBar::begin([
-                    'options' => [
-                        'class' => '',
-                        'role'=>'navigator'
-                    ],
-                    'innerContainerOptions' => [
-                        //'class' => 'container-fluid'
-                    ]
-                ]);
-                ?>
+        <?php NavBar::begin([
+            'options' => [
+                'class' => '',
+                'role'=>'navigator'
+            ],
+            'innerContainerOptions' => [
+                //'class' => 'container-fluid'
+            ]
+		]);?>
                 
 		<?=Nav::widget([
                     'encodeLabels' => false,
@@ -31,10 +27,18 @@ use rmrevin\yii\fontawesome\FontAwesome;
 		            'label' => substr(Yii::$app->user->identity->profile->fullname,0,10),
 		            'items' => [
 		                [
-				            'label' => 'Logout',
+				            'label' => 'Profile',
+				            'url' => ['/admin/access-user/profile/index'],
+						],
+						[
+				            'label' => 'Change Password',
+				            'url' => ['/admin/access-user/profile/change-password'],
+						],
+		                [
+				            'label' => 'Log Out',
 				            'url' => ['/user/logout'],
-                                            'linkOptions' => ['data-method' => 'post']
-				],
+							'linkOptions' => ['data-method' => 'post']
+						],
 		            ],
 		            'options' => ['class' =>'pull-right'],
 		        ],
@@ -47,4 +51,3 @@ use rmrevin\yii\fontawesome\FontAwesome;
 
 	</div>
 </div>
-<!-- /top navigation -->

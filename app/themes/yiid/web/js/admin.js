@@ -129,11 +129,8 @@ $(document).ready(function() {
             mouseWheel:{ preventDefault: true }
         });
     }
-});
-// /Sidebar
 
-// Panel toolbox
-$(document).ready(function() {
+    // Panel toolbox
     $('.collapse-link').on('click', function() {
         var $BOX_PANEL = $(this).closest('.x_panel'),
             $ICON = $(this).find('i'),
@@ -157,12 +154,8 @@ $(document).ready(function() {
 
         $BOX_PANEL.remove();
     });
-});
-// /Panel toolbox
 
-
-// Accordion
-$(document).ready(function() {
+    // Accordion
     $(".expand").on("click", function () {
         $(this).next().slideToggle(200);
         $expand = $(this).find(">:first-child");
@@ -173,6 +166,9 @@ $(document).ready(function() {
             $expand.text("+");
         }
     });
+
+    //tooltip
+    $('[data-toggle="tooltip"]').tooltip();
 });
 
 // NProgress

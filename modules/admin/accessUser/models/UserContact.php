@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\ar;
+namespace accessUser\models;
 
 use Yii;
 
@@ -48,11 +48,11 @@ class UserContact extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
-            'type' => 'Type',
-            'name' => 'Name',
-            'value' => 'Value',
+            'id'         => 'ID',
+            'user_id'    => 'User ID',
+            'type'       => 'Type',
+            'name'       => 'Name',
+            'value'      => 'Value',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -68,7 +68,7 @@ class UserContact extends \yii\db\ActiveRecord
 
     public function behaviors()
     {
-        return[
+        return [
             \yii\behaviors\TimestampBehavior::className(),
         ];
     }

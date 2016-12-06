@@ -20,7 +20,14 @@ use mdm\admin\components\MenuHelper;
         <!-- menu profile quick info -->
         <div class="profile" style="padding-bottom: 80px">
             <div class="profile_pic">
-                <?=Html::img('@web/img/default.jpg', ['class' => 'img-circle profile_img', 'alt' => '...'])?>
+                <?php $profile = Yii::$app->user->identity->profile;
+                    if($profile && $profile->photo_id) {
+                        $avatar = $profile->avatarUrl;
+                    } else {
+                        $avatar = '@web/img/default.jpg';
+                    }
+                ?>
+                <?=Html::img($avatar, ['class' => 'img-circle profile_img', 'alt' => '...'])?>
             </div>
             <div class="profile_info">
                 <span>Assalamu 'alaikum,</span>
@@ -42,9 +49,7 @@ use mdm\admin\components\MenuHelper;
             <div class="menu_section">
                 <h3>Role User</h3>
                 <?php
-                
-                
-                    
+
                 $menuCallback = function($menu) {
                     $item = [
                         'label' => $menu['name'],

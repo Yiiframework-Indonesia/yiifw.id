@@ -9,11 +9,6 @@ return [
         '@app' => dirname(__DIR__),
         '@bower' => '@vendor/bower-asset',
     ],
-    'modules' => [
-        'task' => [
-            'class' => 'task\Module',
-        ],
-    ],
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',

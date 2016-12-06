@@ -1,9 +1,9 @@
 <?php
 
-namespace app\models\form;
+namespace accessUser\models\form;
 
+use accessUser\models\User;
 use Yii;
-use app\models\ar\User;
 use yii\base\Model;
 
 /**
@@ -29,10 +29,9 @@ class ChangeUserEmail extends Model
                 'range' => ['admin', 'administrator', 'superadmin', 'super', 'root']],
             [['email'], 'email'],
             [['password'], 'validatePassword'],
-            [['username', 'email'], 'checkUnique']
+            [['username', 'email'], 'checkUnique'],
         ];
     }
-
 
     /**
      * Validates the password.
@@ -46,13 +45,13 @@ class ChangeUserEmail extends Model
             $this->addError('password', 'Incorrect password.');
         }
     }
-    
+
     public function checkUnique($attribute)
     {
         /* @var $user User */
         $user = Yii::$app->user->identity;
-        if($this->$attribute != $user->$attribute){
-            if(User::find()->where([$attribute=>  $this->$attribute])->exists()){
+        if ($this->$attribute != $user->$attribute) {
+            if (User::find()->where([$attribute => $this->$attribute])->exists()) {
                 $this->addError($attribute, "{$attribute} \"{$this->$attribute}\" has already been taken.");
             }
         }
@@ -67,9 +66,9 @@ class ChangeUserEmail extends Model
     {
         if ($this->validate()) {
             /* @var $user User */
-            $user = Yii::$app->user->identity;
+            $user           = Yii::$app->user->identity;
             $user->username = $this->username;
-            $user->email = $this->email;
+            $user->email    = $this->email;
             if ($user->save()) {
                 return true;
             }

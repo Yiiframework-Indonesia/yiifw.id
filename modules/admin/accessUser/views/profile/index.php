@@ -106,7 +106,7 @@ $email = $model->email;
                     <div class="fileinput fileinput-new" style="width: 100%;" data-provides="fileinput">
                         <div class="fileinput-preview thumbnail mb20"
                              data-trigger="fileinput" style="width: 100%; height: 150px;">
-                                 <?php Html::img($model->avatarUrl ? : '@web/img/default.jpg') ?>
+                                 <?= Html::img($model->avatarUrl ? : '@web/img/default.jpg') ?>
                         </div>
                         <div>
                             <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">
@@ -129,3 +129,4 @@ $email = $model->email;
         <?= Html::endForm() ?>
     </div>
 </div>
+<?php $this->registerJsFile('@web/plugins/fileinput.min.js', ['depends' => 'app\assets\AdminAsset']); ?>

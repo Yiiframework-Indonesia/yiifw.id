@@ -27,7 +27,7 @@ $email = $model->email;
 
 <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
     <div class="profile_img">
-        <div id="crop-avatar">
+        <div id="crop-avatar" data-toggle="tooltip" title="Click here for change your photo ">
             <a data-toggle="modal" data-target="#ChangePhotoProfile" id="btn-change-photo">
                 <?= Html::img($model->avatarUrl ? : '@web/img/default.jpg', [
                     'class' => 'img-responsive avatar-view',

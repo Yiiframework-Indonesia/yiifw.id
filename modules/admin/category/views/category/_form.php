@@ -1,4 +1,10 @@
 <?php
+/**
+ * @link http://www.yiiframework.id/
+ * @author Henry <henry.finasmart@gmail.com>
+ * @copyright Copyright (c) 2016 yiiframework.id
+ * @license https://github.com/Yiiframework-Indonesia/yiifw.id/blob/master/LICENSE.md
+ */
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -25,8 +31,6 @@ use category\models\PostCategory as Category;
             <div class="panel panel-default">
                 <div class="panel-body">
 
-                   
-
                     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
                     <?php echo $form->field($model, 'parent_id')->dropDownList(Category::getCategories(), ['prompt' => '', 'encodeSpaces' => true]) ?>
@@ -49,7 +53,7 @@ use category\models\PostCategory as Category;
                         <div class="form-group">
                             <?php if ($model->isNewRecord): ?>
                                 <?= Html::submitButton('Create', ['class' => 'btn btn-primary']) ?>
-                                <?= Html::a('Cancel', ['/admin/category/default'], ['class' => 'btn btn-default']) ?>
+                                <?= Html::a('Cancel', ['/admin/category'], ['class' => 'btn btn-default']) ?>
                             <?php else: ?>
                                 <?= Html::submitButton('Save', ['class' => 'btn btn-primary']) ?>
                                 <?= Html::a('Delete', ['/admin/category/delete', 'id' => $model->id], [
@@ -72,3 +76,8 @@ use category\models\PostCategory as Category;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+
+<?php 
+$this->registerJs(" $('#postcategory-slug').slugify('#postcategory-title'); ");
+?>

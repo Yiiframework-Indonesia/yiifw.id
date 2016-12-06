@@ -1,4 +1,10 @@
 <?php
+/**
+ * @link http://www.yiiframework.id/
+ * @author Henry <henry.finasmart@gmail.com>
+ * @copyright Copyright (c) 2016 yiiframework.id
+ * @license https://github.com/Yiiframework-Indonesia/yiifw.id/blob/master/LICENSE.md
+ */
 
 namespace category\controllers;
 
@@ -8,6 +14,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use app\classes\AuthFilter;
 use category\models\PostCategory;
 use category\models\PostCategorySearch;
 
@@ -19,6 +26,9 @@ class CategoryController extends Controller
     public function behaviors()
     {
         return [
+            'auth'  => [
+                'class' => AuthFilter::className(),
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

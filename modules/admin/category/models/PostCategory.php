@@ -92,15 +92,10 @@ class PostCategory extends \yii\db\ActiveRecord
         return [
             BlameableBehavior::className(),
             TimestampBehavior::className(),
-//            [
-//                'class' => TimestampBehavior::className(),
-//                'createdAtAttribute' => 'created_at',
-//                'updatedAtAttribute' => 'updated_at',
-//                'value' => new Expression('NOW()'),
-//            ],
             'sluggable' => [
                 'class' => SluggableBehavior::className(),
                 'attribute' => 'title',
+                'ensureUnique'=>true,
             ],
             'nestedInterval' => [
                 'class' => NestedIntervalsBehavior::className(),
@@ -135,6 +130,21 @@ class PostCategory extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(), ['id' => 'updated_by']);
     }
     
+    /**
+     * Return categories by slug
+     * 
+     * @param type $slug
+     * @return type
+     * @throws NotFoundHttpException
+     */
+    protected function findModelBySlug($slug)
+    {
+        if (($model = PostCategory::findOne(['slug' => $slug])) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException();
+        }
+    }
   
     
     /**

@@ -181,3 +181,31 @@ if (typeof NProgress != 'undefined') {
         NProgress.done();
     });
 }
+
+
+/* create slug function */
+$.fn.slugify = function (source, options) {
+        var $target = this;
+        var $source = $(source);
+        var targetIsInput = $target.is('input') || $target.is('textarea');
+
+        var settings = $.extend({
+            slugFunc: (function (val, originalFunc) { return originalFunc(val); })
+        }, options);
+
+         var updateSlug = function () {
+            var slugText = slug($(this).val());
+            if (targetIsInput) {
+                $target.val(slugText);
+            }
+        };
+        
+        $source.keyup( updateSlug ).change( updateSlug );
+        $target.change(function () {
+            var slugText = slug($(this).val());
+            $target.val(slugText).text(slugText);
+        });
+
+        return this;
+    };
+

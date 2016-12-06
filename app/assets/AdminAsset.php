@@ -20,6 +20,7 @@ class AdminAsset extends AssetBundle
     public $js = [
         'js/admin.js',
         'js/gantelella.js',
+        'js/slug.js',
     ];
 
     public $depends = [

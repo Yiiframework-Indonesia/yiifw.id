@@ -14,7 +14,8 @@ $this->title = $model->fullname;
 $this->params['breadcrumbs'][] = ['label' => 'Profile', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-$email = $model->email;
+$email  = $model->email;
+$avatar = $model->avatarUrl ? : '@web/img/default.jpg';
 
 ?>
 
@@ -27,7 +28,7 @@ $email = $model->email;
 
 <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
     <div class="profile_img">
-        <div id="crop-avatar" data-toggle="tooltip" title="Click here for change your photo ">
+        <div id="crop-avatar" data-toggle="tooltip" title="Click here for change your photo">
             <a data-toggle="modal" data-target="#ChangePhotoProfile" id="btn-change-photo">
                 <?= Html::img($model->avatarUrl ? : '@web/img/default.jpg', [
                     'class' => 'img-responsive avatar-view',
@@ -106,7 +107,7 @@ $email = $model->email;
                     <div class="fileinput fileinput-new" style="width: 100%;" data-provides="fileinput">
                         <div class="fileinput-preview thumbnail mb20"
                              data-trigger="fileinput" style="width: 100%; height: 150px;">
-                                 <?= Html::img($model->avatarUrl ? : '@web/img/default.jpg') ?>
+                                 <?= Html::img($avatar) ?>
                         </div>
                         <div>
                             <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">
@@ -115,7 +116,7 @@ $email = $model->email;
                             <span class="btn btn-default btn-file">
                                 <span class="fileinput-new">Select image</span>
                                 <span class="fileinput-exists">Change</span>
-                                <input type="file" name="image">
+                                <input type="file" name="image" id="img-upload">
                             </span>
                         </div>
                     </div>
@@ -129,4 +130,17 @@ $email = $model->email;
         <?= Html::endForm() ?>
     </div>
 </div>
-<?php $this->registerJsFile('@web/plugins/fileinput.min.js', ['depends' => 'app\assets\AdminAsset']); ?>
+<?php
+
+$this->registerJsFile('@web/plugins/fileinput.min.js', ['depends' => 'app\assets\AdminAsset']);
+
+$customScript = <<< SCRIPT
+    $('#ChangePhotoProfile').on('hidden.bs.modal', function () {
+      $('.fileinput-preview').prepend('<img src="$avatar" />');
+
+      //reset form
+      $('#img-upload').val('');
+    })
+SCRIPT;
+    $this->registerJs($customScript, \yii\web\View::POS_READY);
+?>

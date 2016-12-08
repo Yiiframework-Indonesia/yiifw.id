@@ -29,6 +29,7 @@ use yii\helpers\Url;
  */
 class UserProfile extends \yii\db\ActiveRecord
 {
+    const MIN_AGE_ALLOWED = 15;
 
     /**
      * @inheritdoc
@@ -47,11 +48,25 @@ class UserProfile extends \yii\db\ActiveRecord
             [['user_id', 'fullname'], 'required'],
             [['user_id'], 'integer'],
             [['birth_day'], 'safe'],
+            [['birth_day'], 'date', 'format' => 'php:Y-m-d'],
+            ['birth_day', 'minAge'],
             [['bio'], 'string'],
             [['file'], 'file', 'extensions' => ['jpg', 'jpeg', 'png']],
             [['fullname', 'avatar', 'gender', 'address'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
+    }
+
+    public function minAge($attribute, $params)
+    {
+        if (!$this->hasErrors()) {
+            $from = new \DateTime($this->birth_day);
+            $to   = new \DateTime('today');
+
+            if(self::MIN_AGE_ALLOWED >= $from->diff($to)->y){
+                $this->addError($attribute, "Minimum age is ".self::MIN_AGE_ALLOWED);
+            }
+        }
     }
 
     /**

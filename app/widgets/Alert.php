@@ -7,6 +7,8 @@
 
 namespace app\widgets;
 
+use yii\helpers\ArrayHelper;
+
 /**
  * Alert widget renders a message from session flash. All flash messages are displayed
  * in the sequence they were assigned using setFlash. You can set message as following:
@@ -39,7 +41,7 @@ class Alert extends \yii\bootstrap\Widget
         'danger'  => 'alert-danger',
         'success' => 'alert-success',
         'info'    => 'alert-info',
-        'warning' => 'alert-warning'
+        'warning' => 'alert-warning',
     ];
 
     /**
@@ -47,33 +49,44 @@ class Alert extends \yii\bootstrap\Widget
      */
     public $closeButton = [];
 
+    /**
+     * @param mixed $message Flash value to be normalized
+     * @return array
+     */
+    public function normalizeMessage($message)
+    {
+        $res = [];
+        if (is_string($message)) {
+            $res['text'] = $message;
+        } elseif (is_array($message)) {
+            $res = $message;
+        }
+        return $res;
+    }
+
     public function init()
     {
         parent::init();
 
-        $session = \Yii::$app->getSession();
-        $flashes = $session->getAllFlashes();
-        $appendCss = isset($this->options['class']) ? ' ' . $this->options['class'] : '';
+        $session       = \Yii::$app->getSession();
+        $flashes       = $session->getAllFlashes();
+        $notifications = [];
 
         foreach ($flashes as $type => $data) {
             if (isset($this->alertTypes[$type])) {
                 $data = (array) $data;
-                foreach ($data as $i => $message) {
-                    /* initialize css class for each alert box */
-                    $this->options['class'] = $this->alertTypes[$type] . $appendCss;
-
-                    /* assign unique id to each alert box */
-                    $this->options['id'] = $this->getId() . '-' . $type . '-' . $i;
-
-                    echo \yii\bootstrap\Alert::widget([
-                        'body' => $message,
-                        'closeButton' => $this->closeButton,
-                        'options' => $this->options,
-                    ]);
+                foreach ($data as $message) {
+                    $message         = $this->normalizeMessage($message);
+                    $notifications[] = ArrayHelper::merge([
+                        'type' => $type,
+                    ], $message);
                 }
-
                 $session->removeFlash($type);
             }
         }
+
+        echo PNotify::widget([
+            'notifications' => $notifications,
+        ]);
     }
 }

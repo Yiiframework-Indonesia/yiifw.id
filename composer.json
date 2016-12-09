@@ -30,7 +30,10 @@
         "rmrevin/yii2-fontawesome": "~2.17",
         "paulzi/yii2-nested-intervals" : "^1.0",
         "yiisoft/yii2-imagine": "^2.1",
-        "kartik-v/yii2-tabs-x": "*"
+        "kartik-v/yii2-grid": "@dev",
+        "kartik-v/yii2-tabs-x": "*",
+        "kartik-v/yii2-widget-datetimepicker": "*",
+        "kartik-v/yii2-widget-datepicker": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0",

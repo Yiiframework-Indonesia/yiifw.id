@@ -8,6 +8,8 @@ use rmrevin\yii\fontawesome\component\Icon;
 use accessUser\models\User;
 use \kartik\tabs\TabsX;
 
+\app\assets\FileInputAsset::register($this);
+
 /* @var $this View */
 /* @var $model accessUser\models\UserProfile */
 $this->title = $model->fullname;
@@ -131,8 +133,6 @@ $avatar = $model->avatarUrl ? : '@web/img/default.jpg';
     </div>
 </div>
 <?php
-
-$this->registerJsFile('@web/plugins/fileinput.min.js', ['depends' => 'app\assets\AdminAsset']);
 
 $customScript = <<< SCRIPT
     $('#ChangePhotoProfile').on('hidden.bs.modal', function () {

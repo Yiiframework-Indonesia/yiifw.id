@@ -2,15 +2,15 @@
 
 namespace accessUser\controllers;
 
+use accessUser\models\form\ChangePassword;
+use accessUser\models\form\ChangeUserEmail;
 use accessUser\models\User;
 use accessUser\models\UserProfile;
 use app\classes\AuthFilter;
 use app\classes\UploadImage;
-use accessUser\models\form\ChangePassword;
-use accessUser\models\form\ChangeUserEmail;
+use app\components\Controller;
 use Yii;
 use yii\filters\VerbFilter;
-use yii\web\Controller;
 
 /**
  * Profile controller
@@ -61,10 +61,12 @@ class ProfileController extends Controller
             try {
                 if ($model->save()) {
                     $transaction->commit();
-                    return $this->redirect(['profile']);
+                    $this->flash('success', 'Update profile success');
+                    return $this->redirect(['index']);
                 }
             } catch (\Exception $exc) {
                 $model->addError('', $exc->getMessage());
+                $this->flash('error', $exc->getMessage());
             }
             $transaction->rollBack();
         }
@@ -83,6 +85,7 @@ class ProfileController extends Controller
         ]);
 
         if ($model->load(Yii::$app->request->post()) && $model->change()) {
+            $this->flash('success', 'Update account login success');
             return $this->redirect(['index']);
         }
 
@@ -95,6 +98,7 @@ class ProfileController extends Controller
     {
         $model = new ChangePassword();
         if ($model->load(Yii::$app->request->post()) && $model->change()) {
+            $this->flash('success', 'Update password success');
             return $this->goHome();
         }
 
@@ -114,6 +118,8 @@ class ProfileController extends Controller
         if ($photo_id !== false) {
             $model->photo_id = $photo_id;
             $model->save();
+
+            $this->flash('success', 'Update image success');
         }
 
         return $this->redirect(['index']);

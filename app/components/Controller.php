@@ -12,11 +12,6 @@ use Yii;
 class Controller extends \yii\web\Controller
 {
     /**
-     * @var layout
-     */
-    public $layout = '//admin-main';
-
-    /**
      *  Menampilkan url yang sedang aktif
      *
      *  @return string

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use kartik\date\DatePicker;
 use app\widgets\Panel;
 
 /* @var $this yii\web\View */
@@ -23,6 +24,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php $form = ActiveForm::begin(['id' => 'form-change', 'layout' => 'horizontal']); ?>
         <?= $form->field($model, 'fullname') ?>
         <?= $form->field($model, 'bio') ?>
+        <?= $form->field($model, 'birth_day')->widget(DatePicker::classname(), [
+            'type' => DatePicker::TYPE_COMPONENT_APPEND,
+            'pluginOptions' => [
+                'autoclose'=>true,
+                'format' => 'yyyy-mm-dd'
+            ]
+        ]) ?>
         <?= $form->field($model, 'address') ?>
         <?= $form->field($model, 'gender')->radioList(['Male' => 'Male', 'Female' => 'Female']); ?>
         <div class="form-group">
